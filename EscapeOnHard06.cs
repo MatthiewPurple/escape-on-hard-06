@@ -59,7 +59,7 @@ public class EscapeOnHard06 : MelonMod
     {
         public static void Postfix(ref int id, ref string __result)
         {
-            if (id == 296) __result = "Guarantees escape\nduring user's turn."; // New description for Fast Retreat
+            if (id == 296) __result = "Guarantees escape \nduring user's turn."; // New description for Fast Retreat
         }
     }
 }
