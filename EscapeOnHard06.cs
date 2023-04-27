@@ -43,9 +43,6 @@ public class EscapeOnHard06 : MelonMod
             // If on Normal mode temporarily
             else if (temporaryNormalMode)
             {
-                // If the escape is supposed to be successful then flip a coin
-                if (__result == 1) __result = new Random().Next(0, 2);
-
                 // Switches back to Hard mode
                 dds3ConfigMain.cfgSetBit(9u, 2);
             }
