@@ -5,7 +5,7 @@ using escape_on_hard_06;
 using Random = System.Random;
 using Il2Cppnewbattle_H;
 
-[assembly: MelonInfo(typeof(EscapeOnHard06), "Escape on Hard (ver. 0.6)", "1.0.0", "Matthiew Purple")]
+[assembly: MelonInfo(typeof(EscapeOnHard06), "Escape on Hard [low odds] (ver. 0.6)", "1.0.0", "Matthiew Purple")]
 [assembly: MelonGame("アトラス", "smt3hd")]
 
 namespace escape_on_hard_06;

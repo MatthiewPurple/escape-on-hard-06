@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>escape_on_hard_06</RootNamespace>
-    <AssemblyName>escape_on_hard_06</AssemblyName>
+    <RootNamespace>escape_on_hard_low_odds_06</RootNamespace>
+    <AssemblyName>escape_on_hard_low_odds_06</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
