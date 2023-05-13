@@ -3,7 +3,6 @@ using HarmonyLib;
 using Il2Cpp;
 using escape_on_hard_06;
 using Random = System.Random;
-using Il2Cppnewbattle_H;
 
 [assembly: MelonInfo(typeof(EscapeOnHard06), "Escape on Hard [low odds] (ver. 0.6)", "1.0.0", "Matthiew Purple")]
 [assembly: MelonGame("アトラス", "smt3hd")]
@@ -32,19 +31,21 @@ public class EscapeOnHard06 : MelonMod
     [HarmonyPatch(typeof(nbCalc), nameof(nbCalc.nbCheckEscape))]
     private class Patch2
     {
-        public static void Postfix(ref nbMainProcessData_t data, ref int __result)
+        public static void Postfix(ref int __result)
         {
-            // If Demi-fiend is the one escaping and he has Fast Retreat
-            if (data.activeunit == 0 && datCalc.datCheckSkillInParty(296) == 1)
+            bool hasFastRetreat = datCalc.datCheckSkillInParty(296) == 1;
+
+            // If Demi-fiend has Fast Retreat
+            if (hasFastRetreat)
             {
                 __result = 1; // Always escape successfully
             }
 
             // If on Normal mode temporarily
-            else if (temporaryNormalMode)
+            if (temporaryNormalMode)
             {
                 // If the escape is supposed to be successful then flip a coin
-                if (__result == 1) __result = new Random().Next(0, 2);
+                if (__result == 1 && !hasFastRetreat) __result = new Random().Next(0, 2);
 
                 // Switches back to Hard mode
                 dds3ConfigMain.cfgSetBit(9u, 2);
@@ -59,7 +60,7 @@ public class EscapeOnHard06 : MelonMod
     {
         public static void Postfix(ref int id, ref string __result)
         {
-            if (id == 296) __result = "Guarantees escape \nduring user's turn."; // New description for Fast Retreat
+            if (id == 296) __result = "Guarantees escape \nwhen possible."; // New description for Fast Retreat
         }
     }
 }
