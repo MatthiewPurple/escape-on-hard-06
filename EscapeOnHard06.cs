@@ -31,16 +31,18 @@ public class EscapeOnHard06 : MelonMod
     [HarmonyPatch(typeof(nbCalc), nameof(nbCalc.nbCheckEscape))]
     private class Patch2
     {
-        public static void Postfix(ref nbMainProcessData_t data, ref int __result)
+        public static void Postfix(ref int __result)
         {
-            // If Demi-fiend is the one escaping and he has Fast Retreat
-            if (data.activeunit == 0 && datCalc.datCheckSkillInParty(296) == 1)
+            bool hasFastRetreat = datCalc.datCheckSkillInParty(296) == 1;
+
+            // If Demi-fiend has Fast Retreat
+            if (hasFastRetreat)
             {
                 __result = 1; // Always escape successfully
             }
 
             // If on Normal mode temporarily
-            else if (temporaryNormalMode)
+            if (temporaryNormalMode)
             {
                 // Switches back to Hard mode
                 dds3ConfigMain.cfgSetBit(9u, 2);
@@ -55,7 +57,7 @@ public class EscapeOnHard06 : MelonMod
     {
         public static void Postfix(ref int id, ref string __result)
         {
-            if (id == 296) __result = "Guarantees escape \nduring user's turn."; // New description for Fast Retreat
+            if (id == 296) __result = "Guarantees escape \nwhen possible."; // New description for Fast Retreat
         }
     }
 }
